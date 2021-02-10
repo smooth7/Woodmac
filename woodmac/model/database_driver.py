@@ -1,3 +1,5 @@
+"""Postgres Database provider for this project is Elephantsql (https://www.elephantsql.com)"""
+
 import psycopg2
 
 
@@ -6,11 +8,11 @@ class PostgresDBDriver:
     def __init__(self):
         self.connection = None
 
-    # Note: In production, connection parameters (especially password) would be stored more securely
-    # Also the password would be encrypted in production
+    # Note: For real projects, connection parameters (especially password) would be stored more securely.
+    # Also the password would be encrypted for a real project.
     DB_NAME = "vbcychxd"
     DB_USER = "vbcychxd"
-    DB_PASSWORD = "1zCZTW77XdlHu3xRY_x-sSIdLqSdT2md"
+    DB_PASSWORD = "1zCZTW77XdlHu3xRY_x-sSIdLqSdT2md"  # I would never store Passwords this way for real projects
     DB_HOST = "kandula.db.elephantsql.com"
     DB_PORT = "5432"
 

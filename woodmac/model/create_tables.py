@@ -1,5 +1,6 @@
 """
-Creates tables required for storing Sensor Data, noting happens if table is already created
+Creates tables required for storing Sensor Data, noting happens if table is already created.
+Postgres Database provider for this project is Elephantsql (https://www.elephantsql.com)
 """
 
 from woodmac.model.database_driver import PostgresDBDriver
