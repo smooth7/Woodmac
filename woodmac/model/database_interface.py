@@ -4,7 +4,7 @@ from woodmac.model.database_driver import PostgresDBDriver
 from woodmac.model.create_tables import GlobalIdentifierTable, SensorDataTable
 
 
-def generate_new_global_id():
+def generate_new_global_id() -> int:
     with PostgresDBDriver() as con:
         cur = con.cursor()
         cur.execute(f"""
@@ -16,7 +16,7 @@ def generate_new_global_id():
     return global_id
 
 
-def insert_sensor_data(global_id: int, sensor_info: dict):
+def insert_sensor_data(global_id: int, sensor_info: dict) -> None:
     sen_table = SensorDataTable()
     with PostgresDBDriver() as con:
         cur = con.cursor()

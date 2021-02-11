@@ -14,18 +14,19 @@ class ProcessSensorData:
         self._sensor_data = generate_sensor_data()
         self._sensor_data_queue = collections.deque()
 
-    def data_to_queue_pipeline(self):
+    def data_to_queue_pipeline(self) -> None:
         for data in self._sensor_data:
             is_data_valid = self._validate_data_for_transform(data)
             if not is_data_valid:
                 continue
+            print(data[ID_KEY])
             print(f"Transforming data with global id {data[ID_KEY]}, and writing to queue.")
             temp_celsius = round((data[CONTENT_KEY][TEMPERATURE_F_KEY] - 32) / 1.8, 1)
             del(data[CONTENT_KEY][TEMPERATURE_F_KEY])
             data[CONTENT_KEY][TEMPERATURE_C_KEY] = temp_celsius
             self._sensor_data_queue.append(data)
 
-    def queue_to_database_pipeline(self):
+    def queue_to_database_pipeline(self) -> None:
         if self._sensor_data_queue:
             data_to_save = self._sensor_data_queue.popleft()
             try:
@@ -40,7 +41,7 @@ class ProcessSensorData:
             self.queue_to_database_pipeline()
 
     @staticmethod
-    def _validate_data_for_transform(data: dict):
+    def _validate_data_for_transform(data: dict) -> bool:
         try:
             global_id = data[ID_KEY]
             _ = data[DATA_TYPE_KEY]
@@ -60,7 +61,7 @@ class ProcessSensorData:
         return True
 
 
-def main():
+def main() -> None:
     sensor_obj = ProcessSensorData()
     data_to_queue_thread = threading.Thread(target=sensor_obj.data_to_queue_pipeline)
     print("\nStarting thread to process all available sensor data, and then adding them to queue")

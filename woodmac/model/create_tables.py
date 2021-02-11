@@ -11,7 +11,7 @@ class GlobalIdentifierTable:
     _TABLE_NAME = "global_identifiers"
     _IDENTIFIER_FIELD = "global_id"
 
-    def create(self):
+    def create(self) -> None:
         with PostgresDBDriver() as con:
             cur = con.cursor()
             cur.execute(f"""
@@ -38,7 +38,7 @@ class SensorDataTable:
     _IDENTIFIER_FIELD = "global_id"
     _SENSOR_INFO_FIELD = "sensor_info"
 
-    def create(self):
+    def create(self) -> None:
         with PostgresDBDriver() as con:
             cur = con.cursor()
             cur.execute(f"""
