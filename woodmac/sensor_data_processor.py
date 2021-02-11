@@ -1,3 +1,7 @@
+"""
+This module implements a pipeline which takes generated data, processes them, and sends them through relevant pipelines
+"""
+
 import collections
 import threading
 import time
@@ -15,6 +19,7 @@ class ProcessSensorData:
         self._sensor_data_queue = collections.deque()
 
     def data_to_queue_pipeline(self) -> None:
+        """Process all generated data and add to queue"""
         for data in self._sensor_data:
             is_data_valid = self._validate_data_for_transform(data)
             if not is_data_valid:
@@ -27,6 +32,7 @@ class ProcessSensorData:
             self._sensor_data_queue.append(data)
 
     def queue_to_database_pipeline(self) -> None:
+        """Write data in queue to database"""
         if self._sensor_data_queue:
             data_to_save = self._sensor_data_queue.popleft()
             try:
@@ -42,6 +48,7 @@ class ProcessSensorData:
 
     @staticmethod
     def _validate_data_for_transform(data: dict) -> bool:
+        """Validate generated data before processing"""
         try:
             global_id = data[ID_KEY]
             _ = data[DATA_TYPE_KEY]
@@ -62,6 +69,7 @@ class ProcessSensorData:
 
 
 def main() -> None:
+    """Main method to execute pipeline. Uses concurrency."""
     sensor_obj = ProcessSensorData()
     data_to_queue_thread = threading.Thread(target=sensor_obj.data_to_queue_pipeline)
     print("\nStarting thread to process all available sensor data, and then adding them to queue")

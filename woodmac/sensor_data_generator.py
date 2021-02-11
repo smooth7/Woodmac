@@ -21,7 +21,7 @@ TEMP_F_HIGH = 90
 
 def generate_sensor_data(data_count_low: int = DATA_COUNT_LOW, data_count_high: int = DATA_COUNT_HIGH,
                          temp_f_low: int = TEMP_F_LOW, temp_f_high: int = TEMP_F_HIGH):
-
+    """Generate a random number of sensor data within a specified range. Temperature is also randomly generated"""
     data_count = random.randint(data_count_low, data_count_high)
     for i in range(data_count):
         global_id = generate_new_global_id()
