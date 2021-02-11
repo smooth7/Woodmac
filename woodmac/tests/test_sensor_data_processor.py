@@ -89,19 +89,15 @@ class ValidateDataForTransformTest(unittest.TestCase):
     PROCESS_SENSOR_DATA = ProcessSensorData()
 
     def test_validate_no_id_key(self):
-        # Populate Queue first
         self.assertEqual(self.PROCESS_SENSOR_DATA._validate_data_for_transform(self.TEST_DATA_NO_ID), False)
 
     def test_validate_no_data_type_key(self):
-        # Populate Queue first
         self.assertEqual(self.PROCESS_SENSOR_DATA._validate_data_for_transform(self.TEST_DATA_NO_DATA_TYPE), False)
 
     def test_validate_no_temp_f_key(self):
-        # Populate Queue first
         self.assertEqual(self.PROCESS_SENSOR_DATA._validate_data_for_transform(self.TEST_DATA_NO_TEMP_F), False)
 
     def test_validate_no_time_key(self):
-        # Populate Queue first
         self.assertEqual(self.PROCESS_SENSOR_DATA._validate_data_for_transform(self.TEST_DATA_NO_TIME), False)
 
 
